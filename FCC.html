@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var myObj = {
+  gift: "pony",
+  pet: "kitten",
+  bed: "sleigh"
+};
+
+function checkObj(checkProp) {
+  if (myObj.hasOwnProperty(checkProp)) {
+    return myObj[checkProp];
+  } else
+  
+  return "Not Found";
+}
+
+// Test your code by modifying these values
+        console.log(checkObj("gift"));
+        console.log(checkObj("sa"));
+    </script>
+    <script>
+        
+        function destroyer(arr) {
+            var argsObj = {}, tempArr = [];
+            for (var i =1; i < arguments.length; i++) {
+                argsObj[arguments[i]] = true;
+            }
+            tempArr = arr.filter(function(val){
+                if (!(val in argsObj)) return true;
+            });
+            return tempArr;
+        }
+        
+        console.log(destroyer(["tree", "hamburger", 53], "tree", 53));
+    </script>
+</body>
+</html>

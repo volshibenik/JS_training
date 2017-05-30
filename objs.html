@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var list = {}
+        list.name = "mabel"
+        function isEmpty(ob) {
+            var count = 0;
+            for (var k in ob) {
+                count+=1;
+            }
+            return (count > 0)? false :true
+        }
+        console.log(isEmpty(list));
+        
+        
+        var salaries = {
+            "Вася": 110,
+            "Петя": 300,
+            "Даша": 250
+        };
+        
+        function salariesSum(obj) {
+            var sum = 0;
+            for (var key in obj) {
+                sum+=obj[key]
+            }
+            return sum;
+        }
+        console.log(salariesSum(salaries));
+        
+        
+        function biggestSalary (obj) {
+            var biggie = 0, name;
+            for (var key in obj) {
+                if (obj[key] > biggie) {
+                    biggie = obj[key];
+                    name = key;
+                }
+            }
+            return (name || "net sotrudnikov" );
+        }
+        console.log(biggestSalary(salaries));
+        
+        
+        var menu = {
+            width: 200,
+            height: 300,
+            title: "My menu"
+        };
+        
+        
+        function multiplyNumeric(obj) {
+            for (var key in obj) {
+                if (isNumeric(obj[key])) {
+                    obj[key] = obj[key] * 2;
+                }
+            }
+            return obj
+        }
+        
+        multiplyNumeric(menu);
+        
+        
+        console.log(menu);
+        
+        function isNumeric(n) {
+            return !isNaN(parseFloat(n)) && isFinite(n)
+        }
+        
+    </script>
+</body>
+</html>

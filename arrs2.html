@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+       /*У объекта есть свойство className, которое хранит список «классов» – слов, разделенных пробелами:
+
+var obj = {
+  className: 'open menu'
+};
+Напишите функцию removeClass(obj, cls), которая удаляет класс cls, если он есть:
+
+removeClass(obj, 'open'); // obj.className='menu'
+removeClass(obj, 'blabla'); // без изменений (нет такого класса)
+P.S. Дополнительное усложнение. Функция должна корректно обрабатывать дублирование класса в строке:
+
+obj = {
+  className: 'my menu menu'
+};
+removeClass(obj, 'menu');
+alert( obj.className ); // 'my'
+Лишних пробелов после функции образовываться не должно.*/
+        var obj = {
+            className: 'open menu menu me j'
+        };
+        
+        function removeClass(obj, cls) {
+            var arr = obj.className.split(' ');
+            var k = 0;
+            while ( k != -1) {
+                k = arr.indexOf(cls);
+                if (k != -1) {
+                    arr.splice(k, 1)
+                }
+            }
+            
+            obj.className = arr.join(' ');
+
+            return obj.className;
+        }
+        console.log(removeClass(obj, "menu"))
+    </script>
+    
+    <!--Создайте функцию filterRangeInPlace(arr, a, b), которая получает массив с числами arr и удаляет из него все числа вне диапазона a..b. То есть, проверка имеет вид a ≤ arr[i] ≤ b. Функция должна менять сам массив и ничего не возвращать.
+
+Например:
+
+arr = [5, 3, 8, 1];
+
+filterRangeInPlace(arr, 1, 4); // удалены числа вне диапазона 1..4
+
+alert( arr ); // массив изменился: остались [3, 1]-->
+   <script>
+       arr = [5, 3, 2, 1, 1, 6, 8, 1];
+       function filterRangeInPlace(arr, a, b) {
+           for (var i = 0; i < arr.length; i++) {
+               if (arr[i] > b || arr[i] < a) {
+                   arr.splice(i,1);
+                   i--;
+               }
+           }
+       }
+       filterRangeInPlace(arr, 1, 4);
+       console.log(arr);
+    </script>
+    
+    <!--Есть массив строк arr. Создайте массив arrSorted – из тех же элементов, но отсортированный.
+
+Исходный массив не должен меняться.
+
+var arr = ["HTML", "JavaScript", "CSS"];
+
+// ... ваш код ...
+
+alert( arrSorted ); // CSS, HTML, JavaScript
+alert( arr ); // HTML, JavaScript, CSS (без изменений)
+Постарайтесь сделать код как можно короче.-->
+    <script>
+        var arr = ["HTML", "JavaScript", "CSS"];
+        
+        var arrSorted = arr.slice().sort();
+       //alert (arrSorted);
+        var arr2 = [5, 2, 1, -10, 8];
+        function compare (a,b) {
+            return a-b;
+        }
+        alert(arr2.sort(compare));
+        
+       /* Используйте функцию sort для того, чтобы «перетрясти» элементы массива в случайном порядке. */
+
+var arr3 = [1, 2, 3, 4, 5];
+
+        function sortRandom(a,b) {
+            a = Math.random();
+            b = Math.random();
+            return a -b;
+        }
+arr3.sort(sortRandom);
+
+alert( arr3 ); // элементы в случайном порядке, например [3,5,1,2,4]*/
+
+        
+    </script>
+    
+    <!--Напишите код, который отсортирует массив объектов people по полю age.
+
+Например:
+
+var vasya = { name: "Вася", age: 23 };
+var masha = { name: "Маша", age: 18 };
+var vovochka = { name: "Вовочка", age: 6 };
+
+var people = [ vasya , masha , vovochka ];
+
+... ваш код ...
+
+// теперь people: [vovochka, masha, vasya]
+alert(people[0].age) // 6
+Выведите список имён в массиве после сортировки.
+    -->
+    <script>
+        function compareAge (a,b) {
+            return a.age - b.age;
+        }
+        
+        var vasya = { name: "Вася", age: 23 };
+        var masha = { name: "Маша", age: 18 };
+        var vovochka = { name: "Вовочка", age: 6 };
+        
+        var people = [ vasya , masha , vovochka ];
+        
+        
+        
+        function sortByAge (arr) {
+            arr.sort(compareAge)
+            
+        }
+        sortByAge(people);
+        console.log(people)
+    </script>
+
+<!--    Задачи:
+
+Напишите функцию printList(list), которая выводит элементы списка по очереди, при помощи цикла.
+Напишите функцию printList(list) при помощи рекурсии.
+Напишите функцию printReverseList(list), которая выводит элементы списка в обратном порядке, при помощи рекурсии. Для списка выше она должна выводить 4,3,2,1
+Сделайте вариант printReverseList(list), использующий не рекурсию, а цикл.
+Как лучше – с рекурсией или без?-->
+    <script>
+        
+        var list = {
+            value: 1,
+            next: {
+                value: 2,
+                next: {
+                    value: 3,
+                    next: {
+                        value: 4,
+                        next: null
+                    }
+                }
+            }
+        };
+        
+        function printList(obj) {
+            var curObj = obj; 
+            var arr = [];
+            while (curObj.next) {
+                arr.push(curObj.value);
+                curObj = curObj.next;
+            }
+            arr.push(curObj.value);
+            return arr;
+        }
+        console.log(printList(list))
+        
+        
+        function printListRecu(obj) {
+            alert (obj.value)
+            if (obj.next) {
+                obj = obj.next;
+                return printListRecu(obj);
+            } 
+          
+        }
+        console.log(printListRecu(list))
+        
+        function printReverseRecu (obj) {
+            
+            if (obj.next) {
+                
+                printReverseRecu(obj.next);
+            } 
+            alert (obj.value)
+        }
+        console.log(printReverseRecu(list))
+        
+       
+    </script>
+    
+    
+<!--    Анаграммы – слова, состоящие из одинакового количества одинаковых букв, но в разном порядке. Например:
+
+воз - зов
+киборг - гробик
+корсет - костер - сектор
+Напишите функцию aclean(arr), которая возвращает массив слов, очищенный от анаграмм.
+
+Например:
+
+var arr = ["воз", "киборг", "корсет", "ЗОВ", "гробик", "костер", "сектор"];
+
+alert( aclean(arr) ); // "воз,киборг,корсет" или "ЗОВ,гробик,сектор"
+Из каждой группы анаграмм должно остаться только одно слово, не важно какое.
+    -->
+    <script>
+        var arr = ["воз", "киборг", "корсет", "ЗОВ", "гробик", "костер", "s", "sss", "костер"];
+        function aclean (arr) {
+            var k = '', newArr = [], counters = [];
+            for (var i = 0; i < arr.length; i++) {
+                k = arr[i].toLowerCase().split('').sort().join('');
+                newArr.push(k);
+            }
+            for (var i = 0; i < newArr.length; i++) {
+                for (var j = i+1; j < newArr.length; j++) {
+                    if (newArr[i] == newArr[j] && newArr[i] != undefined ) {
+                        delete newArr[j];
+                        counters.push(j);
+                    }
+                }
+            }
+            for (var m = counters.length -1; m >= 0; m--) {
+                arr.splice(counters[m], 1);
+                
+            }
+            return arr;
+        }
+        console.log(aclean(arr))
+    </script>
+    
+    
+   <!-- Пусть arr – массив строк.
+
+Напишите функцию unique(arr), которая возвращает массив, содержащий только уникальные элементы arr.
+
+Например:
+
+function unique(arr) {
+  /* ваш код */
+}
+
+var strings = ["кришна", "кришна", "харе", "харе",
+  "харе", "харе", "кришна", "кришна", "8-()"
+];
+
+alert( unique(strings) ); // кришна, харе, 8-()-->
+   
+    <script>
+        var strings = ["кришна", "кришна", "харе", "харе",
+  "харе", "харе", "кришна", "кришна", "8-()"];
+        
+        function unique(arr) {
+            var myObj = {};
+            for (var i = 0; i < arr.length; i++) {
+                myObj[arr[i]] = arr[i];
+            }
+            var newA = [];
+            for (var k in myObj) {
+                newA.push(myObj[k]);
+            }
+            return newA
+        }
+        console.log(unique(strings));
+    </script>
+    
+    
+</body>
+</html>

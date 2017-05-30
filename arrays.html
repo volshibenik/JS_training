@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var arr = ["Яблоко", "Апельсин", "Груша", "Лимон"];
+        
+        
+        function randomFromArray (arr) {
+            var min = 0, max = arr.length-1;
+            var rand = min + Math.floor(Math.random() * (max + 1 - min));
+            return arr[rand];
+        }
+        console.log(randomFromArray(arr));
+    </script>
+    
+    Напишите код, который:
+
+Запрашивает по очереди значения при помощи prompt и сохраняет их в массиве.
+Заканчивает ввод, как только посетитель введёт пустую строку, не число или нажмёт «Отмена».
+При этом ноль 0 не должен заканчивать ввод, это разрешённое число.
+Выводит сумму всех значений массива
+    
+   <!-- <script>
+        function isNumeric(n) {
+            return !isNaN(parseFloat(n)) && isFinite(n)
+        }
+        
+        function promptSum () {
+            var piece = +prompt("число", 0);
+            var sum = 0;
+            while (isNumeric(piece)) {
+                sum+=piece;
+                piece = +prompt("число", 0);
+            }
+            return sum;
+        }
+        alert(promptSum())
+    </script>-->
+    
+    
+    <script>
+        arr = [1.5, "test", 2,  false];
+        
+        console.log(find(arr, "test")) ;// 0
+        console.log(find(arr, 2)); // 1)
+        console.log(find(arr, 1.5)); //) 2
+        
+        console.log(find(arr, 0)); // -)1
+        
+        function find(arr, value) {
+            for (var i = 0; i <arr.length; i++) {
+                if (arr[i] === value) {
+                    return i;
+                }
+                
+            }
+            return -1;
+        }
+        
+    </script>
+    <!--Целое число, большее 1, называется простым, если оно не делится нацело ни на какое другое, кроме себя и 1.
+
+Древний алгоритм «Решето Эратосфена» для поиска всех простых чисел до n выглядит так:
+
+Создать список последовательных чисел от 2 до n: 2, 3, 4, ..., n.
+Пусть p=2, это первое простое число.
+Зачеркнуть все последующие числа в списке с разницей в p, т.е. 2*p, 3*p, 4*p и т.д. В случае p=2 это будут 4,6,8....
+Поменять значение p на первое не зачеркнутое число после p.
+Повторить шаги 3-4 пока p2 < n.
+Все оставшиеся не зачеркнутыми числа – простые.
+Посмотрите также анимацию алгоритма.
+
+Реализуйте «Решето Эратосфена» в JavaScript, используя массив.
+
+Найдите все простые числа до 100 и выведите их сумму.-->
+   
+   <script>
+       var arr = [];
+       for (var l = 0; l<99;l++) {
+           arr[l] = l+2
+       }
+       function erato (arr) {
+           var newArr = [];
+           for (var i = 0; i < arr.length; i++) {
+               if (arr[i] != undefined) {
+                   p = arr[i];
+                   newArr.push(p);
+                   for (var j = 0; j < arr.length;j++) {
+                        if ( arr[j]%p == 0) {
+                            delete arr[j]; 
+                        }
+                   }
+               }
+           }
+           return newArr;
+       }
+       function sumNewArr (arr) {
+           var sum = 0;
+           for (var i = 0; i < arr.length;i++) {
+               sum = sum + arr[i]
+           }
+            return sum;
+       }
+       
+       console.log(arr);
+
+       console.log(sumNewArr(erato(arr)))
+    </script>
+    
+</body>
+</html>
