@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+	/*	function makeCounter() {
+			var currentCount = 1;
+			return {
+				next : function() {
+					return currentCount++;
+				},
+				set : function(val) {
+					currentCount = val;
+				}
+			}
+		}
+		
+		var counter = makeCounter();
+		
+		console.log(counter.set(44));
+		console.log(counter.next()); */
+		
+		
+		function makeCounter2() {
+			var cuCount = 1;
+			function counter() {
+				return cuCount++;
+			}
+			counter.set = function (vale) {
+				cuCount = vale;
+			}
+			return counter;
+		}
+		var countr =makeCounter2();
+		console.log(countr.set(3));
+		console.log(countr());
+	</script>
+
+	<script>
+		/* В некоторых языках программирования существует объект «строковый буфер», который аккумулирует внутри себя значения. Его функционал состоит из двух возможностей:
+
+		Добавить значение в буфер.
+		Получить текущее содержимое.
+		Задача – реализовать строковый буфер на функциях в JavaScript, со следующим синтаксисом:
+
+		Создание объекта: var buffer = makeBuffer();.
+		Вызов makeBuffer должен возвращать такую функцию buffer, которая при вызове buffer(value) добавляет значение в некоторое внутреннее хранилище, а при вызове без аргументов buffer() – возвращает его.
+		Вот пример работы:
+
+		function makeBuffer() {   }
+
+		var buffer = makeBuffer();
+
+		// добавить значения к буферу
+		buffer('Замыкания');
+		buffer(' Использовать');
+		buffer(' Нужно!');
+
+		// получить текущее значение
+		alert( buffer() ); // Замыкания Использовать Нужно!
+		Буфер должен преобразовывать все данные к строковому типу:
+
+		var buffer = makeBuffer();
+		buffer(0);
+		buffer(1);
+		buffer(0);
+
+		alert( buffer() ); // '010'
+		Решение не должно использовать глобальные переменные.
+		*/
+		console.log('-----');
+		function makeBuffer() {
+			
+			var arr = [];
+			return function () {
+				if (arguments.length === 0) {
+					return arr.splice(0,arr.length).join('');
+				} else {
+					for (var i = 0 ; i < arguments.length; i++) {
+						arr.push(arguments[i].toString());
+					}
+				}
+				
+	
+				return console.log(arr, arr.length);
+			}
+		}
+		
+		var buffer = makeBuffer();
+	
+		console.log(buffer(false));
+		console.log(buffer(false));
+		console.log(buffer());
+		console.log(buffer(' friends'));
+		
+		
+	</script>
+</body>
+</html>
